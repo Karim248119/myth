@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Mythology, Chapter, Sec } from "../../../../types";
 import { getAllMythologies } from "../../../../api/mythologies";
 import PageLayout from "@/components/PageLayout";
@@ -22,17 +22,19 @@ const ChapterPage = () => {
       } catch (error) {
         console.log("Error fetching mythologies:", error);
       } finally {
-        setLoading(false); // Ensure loading stops even on error
+        setLoading(false);
       }
     };
 
     fetchMyth();
   }, []);
 
-  const GreekData = myth?.find((item: Mythology) => item.name === "Greek");
-  const chapters = GreekData?.chapters || [];
+  const GreekData = useMemo(
+    () => myth?.find((item: Mythology) => item.name === "Greek"),
+    [myth]
+  );
+  const chapters = useMemo(() => GreekData?.chapters || [], [GreekData]);
 
-  // Set Current Chapter Index
   useEffect(() => {
     if (currentChapterIndex) {
       const index = Number(currentChapterIndex);
@@ -45,7 +47,7 @@ const ChapterPage = () => {
   }, [currentChapterIndex, chapters]);
 
   if (loading) {
-    return;
+    return null;
   }
 
   if (currentChapter === null || !chapters[currentChapter]) {

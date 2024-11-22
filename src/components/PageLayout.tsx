@@ -11,7 +11,6 @@ import {
 import Nav from "./Nav";
 import border from "../../public/assets/imgs/greek2.png";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
 import { Chapter } from "../../types";
 import { RiOmega } from "react-icons/ri";
 
@@ -22,7 +21,6 @@ export default function PageLayout({
   children: React.ReactNode;
   chapter: Chapter;
 }) {
-  const searchParams = useSearchParams();
   return (
     <div className="overflow-hidden">
       <Nav isLink={true} />
@@ -33,15 +31,12 @@ export default function PageLayout({
         >
           <motion.h1
             {...h3Animation}
-            className="md:text-9xl text-4xl md:h-40 h-12 font-bold  "
+            className="md:text-8xl text-4xl md:h-32 h-12"
           >
             {chapter.name}
           </motion.h1>
         </motion.div>
-        <motion.p
-          {...pAnimation}
-          className="md:w-[30vw] font-bold md:text-base text-xs"
-        >
+        <motion.p {...pAnimation} className="md:w-[30vw] md:text-base text-xs">
           {chapter.description}
         </motion.p>
       </div>
@@ -64,7 +59,7 @@ export default function PageLayout({
       </div>
       <motion.div
         className="flex py-0"
-        animate={{ x: ["0%", "-100%"] }}
+        animate={{ x: ["100%", "0%"] }}
         transition={{
           repeat: Infinity,
           repeatType: "loop",

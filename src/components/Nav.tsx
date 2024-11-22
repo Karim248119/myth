@@ -13,7 +13,7 @@ export default function Nav({
 }: {
   isLink?: boolean;
   current?: number;
-  setCurrent?: any;
+  setCurrent?: (value: number) => void;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [myth, setMyth] = useState<Mythology[]>([]);
@@ -82,11 +82,13 @@ export default function Nav({
               {chapters.map((item, index) => (
                 <button
                   onClick={() => {
-                    isLink
-                      ? router.push(
-                          `/greek/${chapters[index]?.name}?current=${index}`
-                        )
-                      : setCurrent(index);
+                    if (isLink) {
+                      router.push(
+                        `/greek/${chapters[index]?.name}?current=${index}`
+                      );
+                    } else if (setCurrent) {
+                      setCurrent(index);
+                    }
                     setIsOpen(false);
                   }}
                   key={index}

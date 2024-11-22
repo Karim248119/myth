@@ -54,11 +54,11 @@ const GodsSlider = () => {
     }
   };
 
-  const prevSlide = () => {
-    if (chapters.length > 0) {
-      setCurrent((prev) => (prev - 1 + chapters.length) % chapters.length);
-    }
-  };
+  // const prevSlide = () => {
+  //   if (chapters.length > 0) {
+  //     setCurrent((prev) => (prev - 1 + chapters.length) % chapters.length);
+  //   }
+  // };
 
   if (chapters.length === 0) {
     return (
