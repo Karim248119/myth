@@ -5,7 +5,6 @@ import { Mythology, Chapter, Sec } from "../../../../types";
 import { getAllMythologies } from "../../../../api/mythologies";
 import PageLayout from "@/components/PageLayout";
 import Section from "@/components/Section";
-import { GreekData } from "@/data/Greek";
 
 const ChapterPage = () => {
   const searchParams = useSearchParams();

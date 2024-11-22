@@ -8,8 +8,6 @@ import {
   slideIn,
   slideOut2,
 } from "@/components/Animations";
-import { GiGreekTemple } from "react-icons/gi";
-import Line from "@/components/Line";
 import Nav from "./Nav";
 import border from "../../public/assets/imgs/greek2.png";
 import Image from "next/image";

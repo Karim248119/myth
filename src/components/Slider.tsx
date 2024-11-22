@@ -13,7 +13,6 @@ import Button from "./Button";
 import Nav from "./Nav";
 import { getAllMythologies } from "../../api/mythologies";
 import { Mythology } from "../../types";
-import { GiGreekTemple } from "react-icons/gi";
 import { RiOmega } from "react-icons/ri";
 
 const GodsSlider = () => {
