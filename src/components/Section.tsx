@@ -1,13 +1,11 @@
 "use client";
 import React, { useRef } from "react";
-import { inView, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   borderAnimation,
-  h1Animation,
   h2Animation,
   imgAnimation,
   p2Animation,
-  pAnimation,
 } from "./Animations";
 import ImgBorder from "./ImgBorder";
 import { useInView } from "@/hooks/useInView";
