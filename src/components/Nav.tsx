@@ -2,10 +2,9 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { BiX } from "react-icons/bi";
-import { HiOutlineBars2 } from "react-icons/hi2";
 import { Mythology } from "../../types";
 import { getAllMythologies } from "../../api/mythologies";
+import { GiGreekTemple } from "react-icons/gi";
 
 export default function Nav({
   isLink = false,
@@ -43,26 +42,29 @@ export default function Nav({
     <>
       <div className="fixed top-0 left-0 z-40 w-full h-20 md:px-14 px-2 flex items-center">
         <div className="w-full flex  items-center md:gap-5 gap-2 z-50">
-          <Link href="/" className="font-serif uppercase md:text-base text-xs ">
-            Mythology
+          <Link
+            href="/"
+            className="md:text-2xl text-lg flex items-center gap-1"
+          >
+            <GiGreekTemple />
           </Link>
           <div className="h-[2px] flex-1 bg-primary/20" />
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:p-5 p-3 flex flex-col relative items-center  bg-black/0"
+            className="md:p-5 p-3 flex flex-col relative items-center"
           >
             <div
-              className={`md:w-8 w-5 md:h-[2px] h-[1px] bg-white transition-transform duration-300 ease-in-out absolute ${
+              className={`md:w-7 w-5 h-[2px] bg-white transition-transform duration-300 ease-in-out absolute ${
                 isOpen
                   ? "rotate-45 translate-y-0"
-                  : "md:-translate-y-2 translate-y-1"
+                  : "md:-translate-y-[6px] translate-y-1"
               }`}
             />
             <div
-              className={`md:w-8 w-5 md:h-[2px] h-[1px] bg-white transition-transform duration-300 ease-in-out absolute ${
+              className={`md:w-7 w-5 h-[2px] bg-white transition-transform duration-300 ease-in-out absolute ${
                 isOpen
                   ? "-rotate-45 translate-y-0"
-                  : "md:translate-y-2 -translate-y-1"
+                  : "md:translate-y-[6px] -translate-y-1"
               }`}
             />
           </button>

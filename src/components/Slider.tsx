@@ -14,6 +14,7 @@ import Nav from "./Nav";
 import { getAllMythologies } from "../../api/mythologies";
 import { Mythology } from "../../types";
 import { GiGreekTemple } from "react-icons/gi";
+import { RiOmega } from "react-icons/ri";
 
 const GodsSlider = () => {
   const [current, setCurrent] = useState(0);
@@ -110,16 +111,8 @@ const GodsSlider = () => {
             {chapters[current]?.description || "No description available."}
           </motion.p>
           <motion.div {...buttonAnimation} className="flex gap-3">
-            <Button
-              onClick={handleNav}
-              title="اقرأ المزيد"
-              className="md:px-8 px-16"
-            />
-            <Button
-              onClick={nextSlide}
-              title="→"
-              className="px-0 w-10 md:hidden"
-            />
+            <Button onClick={nextSlide} title="→" className="w-10 md:hidden" />
+            <Button onClick={handleNav} title="اقرأ المزيد" className="w-52" />
           </motion.div>
         </motion.div>
       </AnimatePresence>
@@ -153,9 +146,9 @@ const GodsSlider = () => {
       </div>
       {!fadeOut && (
         <div className="absolute md:bottom-14 md:left-14 left-2 bottom-4 z-30 flex flex-col-reverse gap-2 justify-center items-center">
-          <GiGreekTemple />
+          <RiOmega />
           <div className="bg-primary/50 h-10 w-[1px]" />
-          <p className="font-light text-xs text-white/60 -rotate-90 text-nowrap w-2">
+          <p className="font-light text-xs text-white/60 rotate-90 text-nowrap w-2">
             {chapters[current].type}
           </p>
         </div>

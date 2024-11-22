@@ -15,6 +15,7 @@ import border from "../../public/assets/imgs/greek2.png";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { Chapter } from "../../types";
+import { RiOmega } from "react-icons/ri";
 
 export default function PageLayout({
   children,
@@ -54,7 +55,7 @@ export default function PageLayout({
           {...slideIn}
         />
         <div className=" absolute bottom-5 left-5 flex flex-row-reverse justify-center items-center gap-1">
-          <GiGreekTemple />
+          <RiOmega />
           <div className="bg-primary/50 h-[1px] w-10" />
           <p className="font-light text-xs text-white/60">{chapter.type}</p>
         </div>
