@@ -27,7 +27,7 @@ export default function PageLayout({
       <div className="bg-black md:h-[60vh] h-[50vh] flex flex-col  md:flex-row md:justify-between gap-10 justify-center items-center md:px-32 px-5 ">
         <motion.div
           {...borderAnimation}
-          className="border-r-2 border-primary px-5 overflow-x-hidden overflow-y-clip"
+          className="border-r-2 border-primary md:pr-14 pr-5 overflow-x-hidden overflow-y-clip"
         >
           <motion.h1
             {...h3Animation}
