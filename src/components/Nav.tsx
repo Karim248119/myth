@@ -80,7 +80,7 @@ export default function Nav({
           }`}
         >
           <div
-            className={`w-screen h-full bg-black  flex flex-col justify-center items-center  `}
+            className={`w-screen h-full bg-black  flex flex-col justify-center items-end  `}
           >
             <div className="md:flex grid grid-cols-5 justify-center items-center flex-wrap md:gap-10 gap-4 md:w-[80%] w-[95%] md:h-[80%] pt-3 pb-8 mt-14  md:overflow-y-hidden overflow-y-scroll">
               {chapters.map((item, index) => (
