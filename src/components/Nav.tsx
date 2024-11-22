@@ -10,10 +10,12 @@ export default function Nav({
   isLink = false,
   current,
   setCurrent,
+  className,
 }: {
   isLink?: boolean;
   current?: number;
   setCurrent?: (value: number) => void;
+  className?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [myth, setMyth] = useState<Mythology[]>([]);
@@ -40,7 +42,9 @@ export default function Nav({
 
   return (
     <>
-      <div className="fixed top-0 left-0 z-40 w-full h-20 md:px-14 px-2 flex items-center">
+      <div
+        className={`fixed top-0 left-0 z-40 w-full h-20 md:px-14 px-2 flex items-center ${className}`}
+      >
         <div className="w-full flex  items-center md:gap-5 gap-2 z-50">
           <Link
             href="/"
@@ -78,7 +82,7 @@ export default function Nav({
           <div
             className={`w-screen h-full bg-black  flex flex-col justify-center items-center  `}
           >
-            <div className="flex justify-center items-center flex-wrap md:gap-10 gap-4 md:w-[80%] w-[95%] md:h-[80%] pt-3 pb-8 mt-14  md:overflow-y-hidden overflow-y-scroll">
+            <div className="md:flex grid grid-cols-5 justify-center items-center flex-wrap md:gap-10 gap-4 md:w-[80%] w-[95%] md:h-[80%] pt-3 pb-8 mt-14  md:overflow-y-hidden overflow-y-scroll">
               {chapters.map((item, index) => (
                 <button
                   onClick={() => {

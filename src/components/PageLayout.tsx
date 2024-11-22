@@ -23,7 +23,7 @@ export default function PageLayout({
 }) {
   return (
     <div className="overflow-hidden">
-      <Nav isLink={true} />
+      <Nav isLink={true} className="bg-black" />
       <div className="bg-black md:h-[60vh] h-[50vh] flex flex-col  md:flex-row md:justify-between gap-10 justify-center items-center md:px-32 px-5 ">
         <motion.div
           {...borderAnimation}
@@ -31,9 +31,9 @@ export default function PageLayout({
         >
           <motion.h1
             {...h3Animation}
-            className="md:text-8xl text-4xl md:h-32 h-12"
+            className="md:text-8xl text-4xl md:h-32 h-12 flex items-center"
           >
-            {chapter.name}
+            <span>{chapter.name}</span>
           </motion.h1>
         </motion.div>
         <motion.p {...pAnimation} className="md:w-[30vw] md:text-base text-xs">
