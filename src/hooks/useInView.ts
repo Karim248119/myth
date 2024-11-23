@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState } from "react";
 
 export const useInView = (ref: React.RefObject<Element>, threshold = 0.3) => {

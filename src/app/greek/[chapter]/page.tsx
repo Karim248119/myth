@@ -1,39 +1,18 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, useMemo } from "react";
-import { Mythology, Chapter, Sec } from "../../../../types";
-import { getAllMythologies } from "../../../../api/mythologies";
+import { Chapter, Sec } from "../../../../types";
 import PageLayout from "@/components/PageLayout";
 import Section from "@/components/Section";
+import { useGreekData } from "@/hooks/useGreekData";
 
 const ChapterPage = () => {
   const searchParams = useSearchParams();
   const currentChapterIndex = searchParams.get("current");
   const [currentChapter, setCurrentChapter] = useState<number | null>(null);
-  const [myth, setMyth] = useState<Mythology[]>([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  const { greekData, loading } = useGreekData();
 
-  // Fetch Mythologies
-  useEffect(() => {
-    const fetchMyth = async () => {
-      try {
-        const res = await getAllMythologies();
-        setMyth(res);
-      } catch (error) {
-        console.log("Error fetching mythologies:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMyth();
-  }, []);
-
-  const GreekData = useMemo(
-    () => myth?.find((item: Mythology) => item.name === "Greek"),
-    [myth]
-  );
-  const chapters = useMemo(() => GreekData?.chapters || [], [GreekData]);
+  const chapters = useMemo(() => greekData?.chapters || [], [greekData]);
 
   useEffect(() => {
     if (currentChapterIndex) {

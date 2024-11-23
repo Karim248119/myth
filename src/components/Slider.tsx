@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   slideInOut,
@@ -11,31 +11,17 @@ import {
 import { useRouter } from "next/navigation";
 import Button from "./Button";
 import Nav from "./Nav";
-import { getAllMythologies } from "../../api/mythologies";
-import { Mythology } from "../../types";
 import { RiOmega } from "react-icons/ri";
+import { useGreekData } from "@/hooks/useGreekData";
 
 const GodsSlider = () => {
   const [current, setCurrent] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
-  const [myth, setMyth] = useState<Mythology[]>([]);
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchMyth = async () => {
-      try {
-        const res = await getAllMythologies();
-        setMyth(res);
-      } catch (error) {
-        console.log("Error fetching mythologies:", error);
-      }
-    };
+  const { greekData } = useGreekData();
 
-    fetchMyth();
-  }, []);
-
-  const GreekData = myth?.find((item: Mythology) => item.name === "Greek");
-  const chapters = GreekData?.chapters || [];
+  const chapters = greekData?.chapters || [];
 
   const handleNav = () => {
     if (chapters.length > 0) {
