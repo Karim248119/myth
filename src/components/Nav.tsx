@@ -18,7 +18,7 @@ export default function Nav({
   className?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [myth, setMyth] = useState<Mythology[]>([]);
+  const [myth, setMyth] = useState<Mythology>({});
   const router = useRouter();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function Nav({
     fetchMyth();
   }, []);
 
-  const GreekData = myth?.find((item: Mythology) => item.name === "Greek");
+  const GreekData = myth;
   const chapters = GreekData?.chapters || [];
 
   const path = usePathname();

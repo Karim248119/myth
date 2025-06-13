@@ -23,7 +23,7 @@ export interface Mythology {
 }
 
 // Response Interface
-interface MythologyResponse {
+export interface MythologyResponse {
   data: Mythology[]; // Array of mythologies
   message?: string; // Optional message
   error?: string; // Optional error message
