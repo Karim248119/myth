@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { Mythology } from "../../types";
-import { getAllMythologies } from "../../api/mythologies";
+import React, { useState } from "react";
 import { GiGreekTemple } from "react-icons/gi";
+import { useGreekData } from "@/hooks/useGreekData";
+import Image from "next/image";
+import { fonts } from "../../lib/fonts";
 
 export default function Nav({
   isLink = false,
@@ -18,24 +19,9 @@ export default function Nav({
   className?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [myth, setMyth] = useState<Mythology>({});
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchMyth = async () => {
-      try {
-        const res = await getAllMythologies();
-        setMyth(res);
-      } catch (error) {
-        console.log("Error fetching mythologies:", error);
-      }
-    };
-
-    fetchMyth();
-  }, []);
-
-  const GreekData = myth;
-  const chapters = GreekData?.chapters || [];
+  const { greekData } = useGreekData();
+  const chapters = greekData?.chapters || [];
 
   const path = usePathname();
   console.log("path", path);
@@ -83,40 +69,46 @@ export default function Nav({
             className={`w-screen h-full bg-black  flex flex-col justify-center items-center  `}
           >
             <div className="md:flex grid grid-cols-5 justify-center items-center flex-wrap md:gap-10 gap-4 md:w-[80%] w-[95%] md:h-[80%] pt-3 pb-8 mt-14  md:overflow-y-hidden overflow-y-scroll">
-              {chapters.map((item, index) => (
-                <button
-                  onClick={() => {
-                    if (isLink) {
-                      router.push(
-                        `/greek/${chapters[index]?.name}?current=${index}`
-                      );
-                    } else if (setCurrent) {
-                      setCurrent(index);
-                    }
-                    setIsOpen(false);
-                  }}
-                  key={index}
-                  className={`flex flex-col justify-center items-center gap-2 text-xs font-serif ${
-                    current === index ||
-                    decodeURIComponent(path) ===
-                      `/greek/${chapters[index]?.name}`
-                      ? "text-primary"
-                      : "text-white/60"
-                  }`}
-                >
-                  <img
-                    src={item.img}
-                    alt={item.name}
-                    className={`md:w-16 w-9 aspect-square rounded-full object-cover ${
-                      (current === index ||
-                        decodeURIComponent(path) ===
-                          `/greek/${chapters[index]?.name}`) &&
-                      "border-2 border-primary"
+              {chapters.map((item, index) => {
+                const isActive =
+                  current === index ||
+                  decodeURIComponent(path).toLowerCase() ===
+                    `/character/${item.name.toLowerCase()}`;
+
+                return (
+                  <button
+                    onClick={() => {
+                      if (isLink || !setCurrent) {
+                        router.push(
+                          `/character/${encodeURIComponent(item.name)}`,
+                        );
+                      } else {
+                        setCurrent(index);
+                      }
+                      setIsOpen(false);
+                    }}
+                    key={index}
+                    className={`flex flex-col justify-center items-center gap-2 text-xs font-serif ${
+                      isActive ? "text-primary" : "text-white/60"
                     }`}
-                  />
-                  <span className="md:text-base text-xs">{item.name}</span>
-                </button>
-              ))}
+                  >
+                    <Image
+                      width={100}
+                      height={100}
+                      src={item.img.trimEnd()}
+                      alt={item.name}
+                      className={`md:w-16 w-9 aspect-square rounded-full object-cover ${
+                        isActive && "border-2 border-primary"
+                      }`}
+                    />
+                    <span
+                      className={`md:text-xs text-[8px] ${fonts.f2.className}`}
+                    >
+                      {item.name}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -1,31 +1,15 @@
-import { useState, useEffect } from "react";
-import { getAllMythologies } from "../../api/mythologies";
+import { mythData } from "../../data";
 import { Mythology } from "../../types";
 
+const greekMythology: Mythology = {
+  name: "Greek",
+  chapters: mythData,
+};
+
 export const useGreekData = () => {
-  const [greekData, setGreekData] = useState<Mythology>({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getAllMythologies();
-        const greek = data;
-        setGreekData(greek || null);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError(String(err));
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return { greekData, loading, error };
+  return {
+    greekData: greekMythology,
+    loading: false,
+    error: null as string | null,
+  };
 };

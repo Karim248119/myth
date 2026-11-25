@@ -3,12 +3,14 @@ import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import {
   borderAnimation,
-  h2Animation,
+  hAnimation,
   imgAnimation,
   p2Animation,
+  pAnimation,
 } from "./Animations";
 import ImgBorder from "./ImgBorder";
 import { useInView } from "@/hooks/useInView";
+import { fonts } from "../../lib/fonts";
 
 interface Section {
   h: string;
@@ -35,19 +37,19 @@ const Section: React.FC<Section> = ({ h, p, img, reverse = false }) => {
         <motion.div
           {...borderAnimation}
           animate={isInView && borderAnimation.animate}
-          className="border-r-2 border-primary md:p-2 px-2 overflow-x-hidden"
+          className="border-l-2 border-primary md:p-3 px-3 overflow-x-hidden"
         >
           <motion.h2
-            {...h2Animation}
-            animate={isInView && h2Animation.animate}
+            {...hAnimation}
+            animate={isInView && hAnimation.animate}
             viewport={{ once: true, amount: 0.8 }}
-            className="md:text-3xl text-xl font-bold "
+            className={`md:text-3xl text-xl ${fonts.f2.className}`}
           >
             {h}
           </motion.h2>
         </motion.div>
         <motion.p
-          {...p2Animation}
+          {...pAnimation}
           animate={isInView && p2Animation.animate}
           whileInView="visible"
           className="md:text-base text-xs"

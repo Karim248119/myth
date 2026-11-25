@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   borderAnimation,
-  h3Animation,
+  hAnimation,
   pAnimation,
   slideIn,
   slideOut2,
@@ -13,6 +13,9 @@ import border from "../../public/assets/imgs/greek2.png";
 import Image from "next/image";
 import { Chapter } from "../../types";
 import { RiOmega } from "react-icons/ri";
+import Header from "./Header";
+import SlickCarousel from "./SlickCarousel";
+import SplideCarousel from "./Carousel";
 
 export default function PageLayout({
   children,
@@ -27,13 +30,13 @@ export default function PageLayout({
       <div className="bg-black md:h-[60vh] h-[50vh] flex flex-col  md:flex-row md:justify-between gap-10 justify-center items-center md:px-32 px-5 ">
         <motion.div
           {...borderAnimation}
-          className="border-r-2 border-primary md:pr-14 pr-5 overflow-x-hidden overflow-y-clip"
+          className="border-l-2 border-primary md:pl-14 pl-5 overflow-x-hidden overflow-y-clip"
         >
           <motion.h1
-            {...h3Animation}
+            {...hAnimation}
             className="md:text-8xl text-4xl md:h-32 h-12 flex items-center"
           >
-            <span>{chapter.name}</span>
+            <Header>{chapter.name}</Header>
           </motion.h1>
         </motion.div>
         <motion.p {...pAnimation} className="md:w-[30vw] md:text-base text-xs">
@@ -57,19 +60,7 @@ export default function PageLayout({
           className="bg-primary w-[120vw] h-full absolute left-0 top-0"
         />
       </div>
-      <motion.div
-        className="flex py-0"
-        animate={{ x: ["100%", "0%"] }}
-        transition={{
-          repeat: Infinity,
-          repeatType: "loop",
-          ease: "linear",
-          duration: 10,
-        }}
-      >
-        <Image src={border} alt="Sliding Image" />
-        <Image src={border} alt="Sliding Image" />
-      </motion.div>
+      <SplideCarousel />
       <div className="bg-black">{children}</div>
     </div>
   );

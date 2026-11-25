@@ -13,6 +13,8 @@ import Button from "./Button";
 import Nav from "./Nav";
 import { RiOmega } from "react-icons/ri";
 import { useGreekData } from "@/hooks/useGreekData";
+import Header from "./Header";
+import Noise from "./Noise";
 
 const GodsSlider = () => {
   const [current, setCurrent] = useState(0);
@@ -24,11 +26,13 @@ const GodsSlider = () => {
   const chapters = greekData?.chapters || [];
 
   const handleNav = () => {
-    if (chapters.length > 0) {
+    if (chapters.length > 0 && chapters[current]?.name) {
       setFadeOut(true);
       setTimeout(() => {
-        if (chapters.length > 0) {
-          router.push(`/greek/${chapters[current]?.name}?current=${current}`);
+        if (chapters.length > 0 && chapters[current]?.name) {
+          router.push(
+            `/character/${encodeURIComponent(chapters[current].name)}`,
+          );
         }
       }, 500);
     }
@@ -39,12 +43,6 @@ const GodsSlider = () => {
       setCurrent((prev) => (prev + 1) % chapters.length);
     }
   };
-
-  // const prevSlide = () => {
-  //   if (chapters.length > 0) {
-  //     setCurrent((prev) => (prev - 1 + chapters.length) % chapters.length);
-  //   }
-  // };
 
   if (chapters.length === 0) {
     return (
@@ -86,19 +84,16 @@ const GodsSlider = () => {
           exit={{ opacity: 0 }}
           className="absolute z-20 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 md:w-1/2 w-full text-center flex flex-col justify-center items-center px-4"
         >
-          <motion.h1
-            className="text-6xl uppercase mb-10 text-sec"
-            {...h1Animation}
-          >
-            {chapters[current]?.name || "Unknown"}
+          <motion.h1 className="text-7xl uppercase mb-10" {...h1Animation}>
+            <Header>{chapters[current]?.name || "Unknown"}</Header>
           </motion.h1>
-          <motion.p className="text-white md:mb-6 mb-16" {...pAnimation}>
+          <motion.p className="text-white md:mb-6 mb-16" {...h1Animation}>
             {chapters[current]?.description || "No description available."}
           </motion.p>
-          <motion.div {...buttonAnimation} className="flex gap-3">
+          <div className="flex gap-3">
+            <Button onClick={handleNav} title="Read more" className="w-52" />
             <Button onClick={nextSlide} title="→" className="w-10 md:hidden" />
-            <Button onClick={handleNav} title="اقرأ المزيد" className="w-52" />
-          </motion.div>
+          </div>
         </motion.div>
       </AnimatePresence>
 
@@ -121,16 +116,16 @@ const GodsSlider = () => {
                 }}
               >
                 <div className="w-full h-full bg-black/50 opacity-0 group-hover:opacity-100 duration-300" />
-                <div className="opacity-0  group-hover:opacity-100 duration-300 absolute top-[5%] left-[5%] z-20 w-[90%] h-[90%]  m-auto text-xs text-sec flex items-center justify-center p-2 font-bold font-serif">
+                <Header className="opacity-0  group-hover:opacity-100 duration-300 absolute top-[5%] left-[5%] z-20 w-[90%] h-[90%]  m-auto text-xs text-sec flex items-center justify-center p-2">
                   {chapters[(current + 1) % chapters.length]?.name || ""}
-                </div>
+                </Header>
               </motion.button>
             </AnimatePresence>
           </div>
         </div>
       </div>
       {!fadeOut && (
-        <div className="absolute md:bottom-14 md:left-14 left-2 bottom-4 z-30 flex flex-col-reverse gap-2 justify-center items-center">
+        <div className="absolute md:bottom-14 md:left-14 left-2 bottom-4 z-30 flex flex-col gap-2 justify-center items-center">
           <RiOmega />
           <div className="bg-primary/50 h-10 w-[1px]" />
           <p className="font-light text-xs text-white/60 rotate-90 text-nowrap w-2">

@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 
 :root {
   --background: #ffffff;
@@ -30,12 +32,9 @@ h3 {
 }
 
 p {
-  font-family: Calibri;
-  font-weight: 600;
   color: #808080;
 }
 
 h2 {
   /* font-family: "Lucida Sans", "Lucida Sans Regular"; */
-  font-family: cursive;
 }

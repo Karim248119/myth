@@ -79,17 +79,11 @@ export const buttonAnimation = {
   transition: { duration: 0.4, ease: "easeInOut" },
 };
 
-export const h2Animation = {
-  initial: { x: "100%", opacity: 0 },
+export const hAnimation = {
+  initial: { x: "-100%", opacity: 0 },
   animate: { x: 0, opacity: 1 },
-  exit: { x: "-100%", opacity: 0 },
+  exit: { x: "100%", opacity: 0 },
   transition: { duration: 1, delay: 0.5, ease: "easeInOut" },
-};
-export const h3Animation = {
-  initial: { x: "100%", opacity: 0 },
-  animate: { x: 0, opacity: 1 },
-  exit: { x: "-100%", opacity: 0 },
-  transition: { duration: 1, delay: 0.8, ease: "easeInOut" },
 };
 
 export const borderAnimation = {

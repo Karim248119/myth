@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "@/components/Nav";
-
-const body = localFont({
-  src: "./fonts/THARWATEMARARUQAA.ttf",
-  variable: "--font-Ruquaa",
-  weight: "100 900",
-});
+import { fonts } from "../../lib/fonts";
 
 export const metadata: Metadata = {
   title: "Greek Mythology",
@@ -20,8 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="AR" dir="rtl">
-      <body className={`${body.className} antialiased text-white bg-black`}>
+    <html>
+      <body
+        className={`${fonts.base.className} antialiased text-white bg-black`}
+      >
         <Nav />
         {children}
       </body>

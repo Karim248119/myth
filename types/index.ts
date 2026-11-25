@@ -5,6 +5,12 @@ export interface Sec {
   img: string;
 }
 
+// Article Interface
+export interface Article {
+  title: string;
+  paragraph: string;
+}
+
 // Character Interface
 export interface Chapter {
   name: string; // Name of the character
@@ -12,12 +18,12 @@ export interface Chapter {
   img: string; // Image URL for the character
   link: string; // Link associated with the character
   type: string; // Type of the character
-  sections: Sec[]; // List of sections
+  sections?: Sec[]; // Optional extra sections
+  articles?: Article[]; // Character articles
 }
 
 // Mythology Interface
 export interface Mythology {
-  _id?: string; // MongoDB ID for the mythology
   name?: string; // Name of the mythology
   chapters?: Chapter[]; // List of characters (chapters)
 }
